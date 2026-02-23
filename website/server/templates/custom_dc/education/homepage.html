@@ -46,6 +46,45 @@
     </div>
   </div>
 
+  <!-- talk to your data -->
+  <div class="ai-card">
+    <div class="ai-card-header">
+      <div>
+        <h2 class="ai-card-title">Chat with AI to explore education metrics</h2>
+        <p class="ai-card-description">Ask questions about metrics, states, or data sources</p>
+      </div>
+      <div class="ai-badge">
+        <md-icon class="ai-badge-icon">auto_awesome</md-icon>
+        <span class="ai-badge-text">AI Assistant</span>
+      </div>
+    </div>
+    <div class="ai-input-container">
+      <md-outlined-text-field
+          id="ai-query-input"
+          class="ai-text-field"
+          placeholder="Ask me anything about education metrics, states, or datasets..."
+          type="text">
+        <md-icon slot="leading-icon">search</md-icon>
+      </md-outlined-text-field>
+      <md-filled-button id="ai-ask-button" class="ai-ask-button">
+        Ask AI
+      </md-filled-button>
+    </div>
+    <div class="ai-examples">
+      <span class="ai-examples-label">Try:</span>
+      <a href="#" class="example-link" data-query="Top 5 states by opportunity score in 2024">Top 5 states by opportunity score in 2024</a>
+      <a href="#" class="example-link" data-query="Show applicants on a map for 2023">Show applicants on a map for 2023</a>
+      <a href="#" class="example-link" data-query="How many applicants for 2023 from Texas?">How many applicants for 2023 from Texas?</a>
+      <a href="#" class="example-link" data-query="Compare number of applicants from Texas vs Arizona?">Compare number of applicants from Texas vs Arizona?</a>
+      <a href="#" class="example-link" data-query="How many applicants in total?">How many applicants in total?</a>
+      <a href="#" class="example-link" data-query="What's the average household income?">What's the average household income?</a>
+      <a href="#" class="example-link" data-query="What's the highest opportunity score?">What's the highest opportunity score?</a>
+    </div>
+    <div id="ai-response-container">
+      <!-- AI-generated widgets will be injected here -->
+    </div>
+  </div>
+
   <!-- Metrics Summary -->
   <div class="metrics-header">
     <h2 class="metrics-title">Key Metrics Overview</h2>
@@ -100,5 +139,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="module" src="{{url_for('static', filename='custom_dc/education/js/pages/homepage.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='custom_dc/education/js/components/talkToYourData.js')}}"></script>
 
 {% endblock %}

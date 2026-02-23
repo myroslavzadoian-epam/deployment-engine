@@ -1,0 +1,302 @@
+
+/* AI Search Component */
+.ai-card {
+  padding: 2rem;
+  background-color: #ffffff;
+  border: 0.0625rem solid #E0E0E0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ai-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.ai-card-title {
+  color: #212121;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+}
+
+.ai-card-description {
+  color: #757575;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.ai-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  background-color: #C8E6C9;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.ai-badge-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.25rem;
+  color: #2E7D32;
+}
+
+.ai-badge-text {
+  color: #2E7D32;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ai-input-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+/* Material Design Text Field Styling */
+.ai-text-field {
+  flex: 1;
+  max-width: none;
+  --md-outlined-text-field-container-shape: 0.5rem;
+  --md-outlined-text-field-input-text-color: #424242;
+  --md-outlined-text-field-input-text-font: Roboto, sans-serif;
+  --md-outlined-text-field-input-text-size: 1rem;
+  --md-outlined-text-field-outline-color: #E0E0E0;
+  --md-outlined-text-field-focus-outline-color: #1976D2;
+  --md-outlined-text-field-hover-outline-color: #BDBDBD;
+  --md-outlined-text-field-leading-icon-color: #9E9E9E;
+  --md-outlined-text-field-leading-icon-size: 1.5rem;
+  --md-outlined-field-top-space: 1rem;
+  --md-outlined-field-bottom-space: 1rem;
+}
+
+/* Material Design Button Styling */
+.ai-ask-button {
+  --md-filled-button-container-color: #4CAF50;
+  --md-filled-button-container-shape: 0.5rem;
+  --md-filled-button-label-text-color: white;
+  --md-filled-button-label-text-font: Roboto, sans-serif;
+  --md-filled-button-label-text-size: 1.125rem;
+  --md-filled-button-label-text-weight: 500;
+  --md-sys-color-primary: #1A73E8;
+  /* Force explicit dimensions */
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  width: 8rem;
+  font-size: 1.125rem !important;
+}
+
+.ai-ask-button:hover {
+  --md-filled-button-container-color: #388E3C;
+}
+
+.ai-examples {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  opacity: 1;
+}
+
+.ai-examples-label {
+  color: #757575;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.example-chip {
+  --md-assist-chip-container-shape: 0.5rem;
+  --md-assist-chip-container-height: 2.5rem;
+  --md-assist-chip-label-text-font: Roboto, sans-serif;
+  --md-assist-chip-label-text-size: 0.875rem;
+  --md-assist-chip-label-text-color: #424242;
+  --md-assist-chip-hover-state-layer-color: rgba(25, 118, 210, 0.08);
+  --md-assist-chip-pressed-state-layer-color: rgba(25, 118, 210, 0.12);
+  --md-assist-chip-outline-color: transparent;
+  --md-sys-color-surface-container-low: #E0E0E0;
+  background: #E0E0E0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.example-chip:hover {
+  --md-sys-color-surface-container-low: #BDBDBD;
+  background: #BDBDBD;
+}
+
+.example-link {
+  color: #1976D2;
+  text-decoration: none !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+  padding-top: 0.125rem;
+}
+
+.example-link:hover {
+  color: #1557B0;
+  text-decoration: none !important;
+  border-bottom-color: #1557B0;
+}
+
+#ai-response-container {
+  margin-top: 1rem;
+}
+
+/* Analytical results display - Material Design Card */
+.ai-analysis-result {
+  background-color: #F8F9FA;
+  border: 0.0625rem solid #E0E0E0;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-top: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-analysis-result::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.25rem;
+  background: linear-gradient(180deg, #1A73E8 0%, #4285F4 100%);
+}
+
+.ai-analysis-result:hover {
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.12);
+}
+
+.ai-analysis-summary {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #202124;
+  margin: 0 0 0.75rem 0;
+  font-weight: 400;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ai-analysis-summary md-icon {
+  color: #1A73E8;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.ai-analysis-details {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ai-analysis-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #E8EAED;
+}
+
+.ai-metric-label {
+  font-size: 0.875rem;
+  color: #5F6368;
+}
+
+.ai-metric-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1A73E8;
+}
+
+.ai-metric-info {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #5F6368;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ai-metric-info md-icon {
+  font-size: 1rem;
+  color: #80868B;
+}
+
+.ai-toggle-details {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #1a73e8;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ai-toggle-details:hover {
+  text-decoration: underline;
+}
+
+.ai-raw-data {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  max-height: 12.5rem;
+  overflow-y: auto;
+}
+
+/* Widget visibility control */
+.widget-container {
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.widget-container.hidden {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Widget highlight animation when updated by AI - Material Design */
+.widget-highlight {
+  animation: widget-pulse 2s ease-in-out;
+  box-shadow: 0 0 0 2px #4CAF50, 0 4px 12px rgba(76, 175, 80, 0.2);
+  border-radius: 0.5rem;
+}
+
+@keyframes widget-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 2px #4CAF50, 0 4px 12px rgba(76, 175, 80, 0.2);
+  }
+}

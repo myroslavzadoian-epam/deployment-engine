@@ -1,0 +1,125 @@
+{
+  "domain": "education",
+  "display_name": "Student Recruitment Intelligence",
+  "description": "Analyze student recruitment patterns, opportunity scores, and market potential.",
+  "assistant_role": "You are an assistant for a student recruitment intelligence dashboard. Help users analyze recruitment data and update dashboard widgets accordingly.",
+  "search_keywords": ["applicants", "population", "income", "opportunity", "enrollment", "students", "graduation"],
+  "place_examples": [
+    {"name": "Texas", "dcid": "geoId/48"},
+    {"name": "California", "dcid": "geoId/06"},
+    {"name": "USA", "dcid": "country/USA"}
+  ],
+  "widgets": [
+    {
+      "id": "totalApplicantsByYear",
+      "description": "KPI card showing total applicant count",
+      "default_variable": "Applicants",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highOpportunityRegions",
+      "description": "KPI card showing high-opportunity regions count",
+      "default_variable": "HighOpportunityRegionsCount",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "regionsWithDecliningInterest",
+      "description": "KPI card showing regions with declining interest",
+      "default_variable": "IsDecliningInterestRegion",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "dc-map",
+      "description": "Choropleth map showing data by geographic region",
+      "supports": ["variable", "parentPlace", "childPlaceType", "date"]
+    },
+    {
+      "id": "dc-ranking",
+      "description": "Ranked list comparing places by a metric",
+      "supports": ["variable", "parentPlace", "childPlaceType"]
+    }
+  ],
+  "widget_selection_rules": [
+    "For applicant counts → totalApplicantsByYear",
+    "For rankings or 'top N' → dc-ranking",
+    "For geographic distribution or 'show on map' → dc-map",
+    "For opportunity metrics → highOpportunityRegions",
+    "For declining interest → regionsWithDecliningInterest"
+  ],
+  "example_queries": [
+    {
+      "question": "Top 5 states by opportunity score",
+      "steps": [
+        "Search for 'opportunity score' variable",
+        "Call get_ranked_places with limit=5",
+        "Update dc-ranking widget"
+      ]
+    },
+    {
+      "question": "How many applicants from Texas in 2023?",
+      "steps": [
+        "Search for 'applicants' variable",
+        "Call get_observations for place=geoId/48, date=2023",
+        "Update totalApplicantsByYear widget"
+      ]
+    },
+    {
+      "question": "Show applicants on a map",
+      "steps": [
+        "Search for 'applicants' variable",
+        "Update dc-map widget with parentPlace=country/USA, childPlaceType=State"
+      ]
+    }
+  ],
+  "response_examples": [
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "**Total Applicants Overview**\n\nThere were 15,000 total applicants in 2023, representing applications received across all 50 states. This figure reflects the overall market reach of your recruitment efforts.\n\n**Regional Distribution:**\n• **Texas** leads with 2,450 applicants (16.3%), showing strong Southwest presence\n• **California** follows with 2,180 applicants (14.5%), driven by population density\n• **Florida** ranks third with 1,890 applicants (12.6%)\n• **New York** and **Illinois** round out the top 5 with 1,650 and 1,420 applicants\n\n**Analysis & Recommendations:**\nThe data shows strong concentration in large population states, with Sun Belt states showing above-average growth. Consider expanding targeted outreach in high-potential but underperforming markets like the Midwest to diversify your applicant pool.",
+        "source": "Recruitment Dashboard",
+        "widgetIds": ["totalApplicantsByYear"],
+        "widgetConfigs": {
+          "totalApplicantsByYear": {
+            "variable": "Applicants",
+            "place": "country/USA",
+            "date": "2023",
+            "title": "Total Applicants (2023)"
+          }
+        }
+      }
+    },
+    {
+      "type": "ranking",
+      "example": {
+        "summary": "**Top States by Opportunity Score**\n\nThe opportunity score measures market potential based on demographics, income levels, and educational attainment. Here are the top performing states:\n\n**Top 5 Rankings:**\n• **Massachusetts** - 82.5 (highest score, strong education infrastructure)\n• **Connecticut** - 81.2 (high income levels, dense population)\n• **New Jersey** - 80.8 (proximity to major metro areas)\n• **Virginia** - 79.5 (growing tech sector influence)\n• **Maryland** - 78.2 (strong government/education employment)\n\n**Key Insights:**\nThe Northeast dominates the top rankings, correlating with higher household incomes and educational attainment. However, these markets are also highly competitive. Consider balancing efforts between high-opportunity states and emerging markets in the Southeast where scores are improving year-over-year.",
+        "source": "Data Commons",
+        "widgetIds": ["dc-ranking"],
+        "widgetConfigs": {
+          "dc-ranking": {
+            "variable": "OpportunityScore",
+            "parentPlace": "country/USA",
+            "childPlaceType": "State",
+            "title": "Top States by Opportunity Score"
+          }
+        }
+      }
+    },
+    {
+      "type": "map",
+      "example": {
+        "summary": "**Geographic Distribution of Applicants**\n\nThe map displays applicant distribution across all U.S. states, revealing important geographic patterns in your recruitment reach.\n\n**Key Observations:**\n• **High concentration** in coastal states (California, Texas, Florida, New York)\n• **Moderate activity** in the Midwest and Mountain West regions\n• **Lower engagement** in rural states and the Northern Plains\n\n**Regional Analysis:**\nThe Sun Belt corridor (Texas → Florida) shows the strongest applicant density, aligning with population migration trends. The Pacific Northwest shows emerging growth potential with 15% year-over-year increase.\n\n**Recommendations:**\nConsider targeted digital campaigns in underrepresented regions to expand geographic diversity and reduce over-reliance on traditional high-volume markets.",
+        "source": "Data Commons",
+        "widgetIds": ["dc-map"],
+        "widgetConfigs": {
+          "dc-map": {
+            "variable": "Applicants",
+            "parentPlace": "country/USA",
+            "childPlaceType": "State",
+            "date": "2023",
+            "title": "Applicants by State (2023)"
+          }
+        }
+      }
+    }
+  ]
+}

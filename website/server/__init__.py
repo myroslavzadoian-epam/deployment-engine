@@ -319,6 +319,9 @@ def register_routes_admin_panel_dc(app, cfg):
   from server.routes.admin_panel import api as admin_panel_api
   app.register_blueprint(admin_panel_api.bp)
 
+  from server.routes.ai import api as ai_api
+  app.register_blueprint(ai_api.bp)
+
 
 def create_app(nl_root=DEFAULT_NL_ROOT):
   app = Flask(__name__, static_folder='dist', static_url_path='')
