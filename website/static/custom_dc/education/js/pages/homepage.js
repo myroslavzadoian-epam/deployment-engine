@@ -15,6 +15,8 @@
  */
 
 import { getApiRoot } from '../utils/api.js';
+import { initForecastWidgetWithData, showForecastLoading, showForecastError } from '../components/forecast-widget.js';
+import { initAiInsightsWidgetWithData, showAiInsightsLoading, showAiInsightsError } from '../components/ai-insights-widget.js';
 
 // Hero Section - Hide on scroll
 let lastScroll = 0;
@@ -143,9 +145,41 @@ function observeRankingWidget() {
   observer.observe(root, config);
 }
 
-// Initialize with default year
+/**
+ * Initialize AI widgets (Forecast and Insights) with a single API request
+ * @param {string} domain - Domain identifier (e.g., 'education')
+ * @param {string} forecastContainerId - ID of the forecast widget container
+ * @param {string} insightsContainerId - ID of the insights widget container
+ */
+async function initAiWidgets(domain, forecastContainerId, insightsContainerId) {
+  // Show loading states
+  showForecastLoading(forecastContainerId);
+  showAiInsightsLoading(insightsContainerId);
+
+  try {
+    // Single API request for both widgets
+    const response = await fetch(`${apiRoot}/api/ai/insights/${domain}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Initialize both widgets with the same data
+    initForecastWidgetWithData(forecastContainerId, data);
+    initAiInsightsWidgetWithData(insightsContainerId, data, { domain });
+  } catch (error) {
+    console.error('Failed to load AI insights data:', error);
+    showForecastError(forecastContainerId, error.message);
+    showAiInsightsError(insightsContainerId, error.message);
+  }
+}
+
+// Initialize with default year and AI widgets
 $(document).ready(function () {
   setYear('2025');
+  initAiWidgets('education', 'forecast-container', 'ai-insights-container');
 
   // Poll for ranking widget render and update column names
   let attempts = 0;

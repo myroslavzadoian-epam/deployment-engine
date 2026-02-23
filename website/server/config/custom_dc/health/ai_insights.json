@@ -1,0 +1,83 @@
+{
+  "domain": "health",
+  "display_name": "Public Health Intelligence",
+  "description": "Track health outcomes, disease prevalence, and healthcare access metrics.",
+  "risk_criteria": {
+    "critical": "Disease outbreak or healthcare access crisis (>20% underserved)",
+    "high": "Elevated disease rates or declining healthcare coverage (10-20%)",
+    "medium": "Above-average health risks or moderate access gaps (5-10%)",
+    "monitored": "Normal health indicators within acceptable ranges"
+  },
+  "regulatory_context": "HIPAA, CDC guidelines, state health department policies, ACA requirements",
+  "time_horizon": "Immediate to 1 year",
+  "metrics": [
+    {
+      "name": "Obesity Rate",
+      "dcid": "Percent_Person_Obesity",
+      "description": "Percentage of population with obesity",
+      "unit": "%"
+    },
+    {
+      "name": "Smoking Rate",
+      "dcid": "Percent_Person_Smoking",
+      "description": "Percentage of population who smoke",
+      "unit": "%"
+    },
+    {
+      "name": "Physical Health Not Good",
+      "dcid": "Percent_Person_WithPhysicalHealthNotGood",
+      "description": "Percentage reporting physical health not good",
+      "unit": "%"
+    },
+    {
+      "name": "Diabetes Rate",
+      "dcid": "Percent_Person_WithDiabetes",
+      "description": "Percentage of population with diabetes",
+      "unit": "%"
+    },
+    {
+      "name": "High Blood Pressure Rate",
+      "dcid": "Percent_Person_WithHighBloodPressure",
+      "description": "Percentage with high blood pressure",
+      "unit": "%"
+    },
+    {
+      "name": "Healthy Vitamin D Rate",
+      "dcid": "Percent_Person_WithHealthyVitaminD",
+      "description": "Percentage with healthy vitamin D levels",
+      "unit": "%"
+    },
+    {
+      "name": "Vaccination Rate",
+      "dcid": "Percent_Person_Vaccinated",
+      "description": "Percentage of population vaccinated",
+      "unit": "%"
+    },
+    {
+      "name": "Sick People Rate",
+      "dcid": "Percent_Person_Sick",
+      "description": "Percentage of population who are sick",
+      "unit": "%"
+    }
+  ],
+  "action_templates": [
+    {
+      "action_id": "emergency_response",
+      "label_template": "Deploy emergency health resources to {count} critical areas",
+      "priority": "critical",
+      "time_horizon": "48 hours"
+    },
+    {
+      "action_id": "expand_coverage",
+      "label_template": "Expand healthcare coverage programs in {count} underserved regions",
+      "priority": "high",
+      "time_horizon": "30 days"
+    },
+    {
+      "action_id": "preventive_programs",
+      "label_template": "Launch preventive health programs in {count} at-risk communities",
+      "priority": "medium",
+      "time_horizon": "90 days"
+    }
+  ]
+}

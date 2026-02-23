@@ -1,0 +1,77 @@
+{
+  "domain": "education",
+  "display_name": "Student Recruitment Intelligence",
+  "description": "Analyze student recruitment patterns, opportunity scores, and market potential.",
+  "risk_criteria": {
+    "critical": "Sharp decline (>30%) in applicant interest or competitive threat",
+    "high": "Declining trend (10-30%) or underperforming vs benchmark",
+    "medium": "Flat growth or slight decline (5-10%)",
+    "monitored": "Stable or growing market with no immediate concerns"
+  },
+  "regulatory_context": "Higher Education Act, state education policies, FERPA compliance",
+  "time_horizon": "1 semester to 2 academic years",
+  "metrics": [
+    {
+      "name": "Total Applicants",
+      "dcid": "Applicants",
+      "description": "Total number of applicants",
+      "is_private": true
+    },
+    {
+      "name": "Average Opportunity Score",
+      "dcid": "OpportunityScore",
+      "description": "Composite opportunity score (0-100)",
+      "is_private": true
+    },
+    {
+      "name": "High Opportunity Markets",
+      "dcid": "HighOpportunityMarkets",
+      "description": "Count of high-opportunity market regions",
+      "is_private": true
+    },
+    {
+      "name": "Average Household Income",
+      "dcid": "HouseholdIncome",
+      "description": "Average household income",
+      "unit": "USD"
+    },
+    {
+      "name": "High-Opportunity Regions Count",
+      "dcid": "HighOpportunityRegionsCount",
+      "description": "Number of regions with high opportunity for recruitment",
+      "is_private": true
+    },
+    {
+      "name": "Declining Interest Regions",
+      "dcid": "IsDecliningInterestRegion",
+      "description": "Regions showing declining applicant interest",
+      "is_private": true
+    },
+    {
+      "name": "Applicants Per Capita",
+      "dcid": "ApplicantsPerCapita",
+      "description": "Applicant density normalized by population",
+      "is_private": true
+    }
+  ],
+  "action_templates": [
+    {
+      "action_id": "urgent_outreach",
+      "label_template": "Launch urgent outreach campaign in {count} critical markets",
+      "priority": "critical",
+      "time_horizon": "2 weeks"
+    },
+    {
+      "action_id": "expand_recruitment",
+      "label_template": "Expand recruitment efforts in {count} high-opportunity regions",
+      "priority": "high",
+      "time_horizon": "1 month"
+    },
+    {
+      "action_id": "monitor_markets",
+      "label_template": "Monitor {count} markets for emerging opportunities",
+      "priority": "medium",
+      "time_horizon": "1 semester"
+    }
+  ]
+}
