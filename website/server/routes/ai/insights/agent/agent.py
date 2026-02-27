@@ -32,7 +32,6 @@ from google.genai import types
 
 from .types import AIInsightResponse, Metadata, Forecast, RegionGrowth, DiversityPrediction, ForecastAction
 from .instructions import AGENT_INSTRUCTIONS
-from .tools import get_insights_tools
 
 logger = logging.getLogger(__name__)
 
@@ -88,13 +87,9 @@ def _extract_json_from_text(text: str) -> dict | None:
 class InsightsAgent:
   """Encapsulates the insights agent logic using Google ADK."""
 
-  def __init__(self, mcp_url: str = None):
-    """Initialize the InsightsAgent.
-
-    Args:
-        mcp_url: Optional MCP server URL for data access
-    """
-    self.mcp_url = mcp_url
+  def __init__(self):
+    """Initialize the InsightsAgent."""
+    self.mcp_url = 'https://api.datacommons.org/mcp'
     self.runner = None
 
   def _create_runner(self) -> Runner:
@@ -122,22 +117,15 @@ class InsightsAgent:
 
   def get_tools(self) -> list:
     """Get the list of tools available to the agent."""
-    tools = []
-
-    if self.mcp_url:
-      tools.append(
-        McpToolset(
-          connection_params=StreamableHTTPConnectionParams(
-            url=self.mcp_url,
-            timeout=60,
-          )
+    return [
+      McpToolset(
+        connection_params=StreamableHTTPConnectionParams(
+          url=self.mcp_url,
+          timeout=60,
+          headers={"X-API-Key": os.environ["DC_API_KEY"]},
         )
       )
-    else:
-      # Use direct insights tools as fallback
-      tools.extend(get_insights_tools())
-
-    return tools
+    ]
 
   def _get_default_forecast(self, domain: str) -> Forecast | None:
     """Get default forecast data for a domain."""
@@ -427,13 +415,13 @@ class InsightsAgent:
                 pass
 
 
-def create_insights_agent(mcp_url: str = None) -> InsightsAgent:
+def create_insights_agent() -> InsightsAgent:
   """Create and return an InsightsAgent instance.
 
   Args:
-      mcp_url: Optional MCP server URL for data access
+      mcp_url: MCP server URL for data access
 
   Returns:
       Configured InsightsAgent instance
   """
-  return InsightsAgent(mcp_url=mcp_url)
+  return InsightsAgent()

@@ -155,7 +155,7 @@ async def get_insights(domain: str):
   try:
     global _insights_agent
     if _insights_agent is None:
-      _insights_agent = create_insights_agent(mcp_url=os.environ.get("MCP_URL"))
+      _insights_agent = create_insights_agent()
 
     result: AIInsightResponse = await _insights_agent.run(domain_lower, query)
 

@@ -36,10 +36,6 @@ from .domain_context import (
   get_domain_context,
   SUPPORTED_DOMAINS,
 )
-from .data_acquisition import (
-  fetch_domain_signals,
-  DomainSignals,
-)
 
 __all__ = [
   # Schema
@@ -59,7 +55,4 @@ __all__ = [
   "DomainContext",
   "get_domain_context",
   "SUPPORTED_DOMAINS",
-  # Data Acquisition
-  "fetch_domain_signals",
-  "DomainSignals",
 ]
