@@ -11,11 +11,8 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.tools.mcp_tool.mcp_toolset import McpToolset, StreamableHTTPConnectionParams
 from google.genai import types
 
-from pydantic import BaseModel, Field
-
 from .instructions import AGENT_INSTRUCTIONS, get_agent_instructions
 from .types import AgentResponse
-from .tools import get_dc_tools
 
 _logger = logging.getLogger(__name__)
 
@@ -24,23 +21,17 @@ AGENT_NAME = os.environ.get("AGENT_NAME", "datacommons_agent")
 OUTPUT_KEY = "ai_chat"
 
 
-class Context(BaseModel):
-  """Configuration for a single widget"""
-  parent_place: str = Field(default='country/USA')
-  child_place_type: str = Field(default='State')
-
-
 class ChatAgent:
   """Encapsulates the chat agent logic."""
 
-  def __init__(self, mcp_url: str = None, domain: str = None):
+  def __init__(self, domain: str = None):
     """Initialize the ChatAgent.
 
     Args:
-        mcp_url: Optional MCP server URL for data access
+        mcp_url: MCP server URL for data access
         domain: Domain identifier (education, energy, health, etc.)
     """
-    self.mcp_url = mcp_url
+    self.mcp_url = 'https://api.datacommons.org/mcp'
     self.domain = domain
     self.runner = None
     self._instructions = None
@@ -80,17 +71,15 @@ class ChatAgent:
 
   def get_tools(self) -> list:
     tools = []
-    if self.mcp_url:
-      tools.append(
-        McpToolset(
-          connection_params=StreamableHTTPConnectionParams(
-            url=self.mcp_url,
-            timeout=60,
-          )
+    tools.append(
+      McpToolset(
+        connection_params=StreamableHTTPConnectionParams(
+          url=self.mcp_url,
+          timeout=60,
+          headers={"X-API-Key": os.environ["DC_API_KEY"]},
         )
       )
-    else:
-      tools.extend(get_dc_tools())
+    )
     return tools
 
   def _parse_response(self, chat_state) -> AgentResponse:
@@ -208,14 +197,13 @@ class ChatAgent:
           _logger.warning(f"Failed to close toolset: {e}")
 
 
-def create_chat_agent(mcp_url: str = None, domain: str = None) -> ChatAgent:
+def create_chat_agent(domain: str = None) -> ChatAgent:
   """Creates a ChatAgent instance.
 
   Args:
-      mcp_url: Optional MCP server URL for data access
       domain: Domain identifier (education, energy, health, etc.)
 
   Returns:
       ChatAgent configured for the specified domain
   """
-  return ChatAgent(mcp_url, domain=domain)
+  return ChatAgent(domain=domain)
