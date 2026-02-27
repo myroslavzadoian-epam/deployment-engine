@@ -34,7 +34,6 @@ def _get_chat_agent(domain: str = None):
 
   if cache_key not in _chat_agents:
     _chat_agents[cache_key] = create_chat_agent(
-      mcp_url=os.environ.get("MCP_URL"),
       domain=domain
     )
   return _chat_agents[cache_key]

@@ -29,15 +29,15 @@ You have access to Data Commons tools for fetching statistical data:
 
 1. **search_indicators(query, place?, include_topics=true)**: Find variable DCIDs by keyword search
 2. **get_observations(variable, place, date?)**: Get data for a single place
-3. **get_ranked_places(variable, parent_place, child_place_type, date?, limit?, ascending?)**: Rank places by a metric
-4. **resolve_place(place_name)**: Convert place names to DCIDs
+
+**CRITICAL: You must ONLY call tools listed above. Do NOT call any other tool names.**
 
 Search keywords: {search_keywords}
 
 ## Workflow
 
 1. Search for the variable DCID using `search_indicators`
-2. Use `get_observations` for single-place queries or `get_ranked_places` for rankings
+2. Use `get_observations` to fetch the data for the relevant place and date
 3. Return a JSON response with the data and widget configuration
 
 ## Available Widgets
@@ -85,12 +85,13 @@ Always respond with a JSON object. Use only predefined widget IDs from the "Avai
 ## Guidelines
 
 - Use `search_indicators` first to find variable DCIDs
-- For rankings or "top N" questions, use `get_ranked_places`
+- Use `get_observations` to fetch data for specific places
 - When no place is specified, default to "country/USA"
 - Include widget configurations when returning data
 - Present data in human-readable format (use place names, not DCIDs)
 - Format numbers with appropriate separators (e.g., 1,842 instead of 1842)
 - **CRITICAL: Only use widget IDs from the Available Widgets list. Never create new widget IDs or modify existing ones.**
+- **CRITICAL: Only call tools that are listed in the Tools section above. Never call tools that are not listed.**
 
 ## Summary Field Guidelines - COMPREHENSIVE ANALYSIS REQUIRED
 
@@ -102,7 +103,7 @@ The `summary` field MUST provide a **comprehensive, multi-paragraph analytical r
 Start with the direct answer and its significance. Explain what this number means in context.
 
 **Paragraph 2 - Detailed Breakdown (use bullet points):**
-Provide supporting data points. ALWAYS use `get_ranked_places` to fetch top/bottom performers even if not explicitly asked:
+Provide supporting data points using the observations returned:
 • Top 3-5 regions/states with their values
 • Bottom performers if relevant
 • Notable outliers or patterns
@@ -133,9 +134,6 @@ The concentration of applicants in Sun Belt states (Texas, Florida, Arizona) sug
 
 ### Example of BAD Response (DO NOT DO THIS):
 "There were 1,842 total applicants in 2025."
-
-### IMPORTANT: Always Fetch Additional Data
-When answering ANY question about totals or single metrics, ALWAYS also call `get_ranked_places` to provide the top 5 breakdown. This enriches every response with valuable context.
 """
 
 
@@ -182,13 +180,13 @@ Your role is to help analyze data using the Data Commons API tools.
 
 1. **search_indicators(query, place?, include_topics=true)**: Find variable DCIDs by keyword search
 2. **get_observations(variable, place, date?)**: Get data for a single place
-3. **get_ranked_places(variable, parent_place, child_place_type, date?, limit?, ascending?)**: Rank places by a metric
-4. **resolve_place(place_name)**: Convert place names to DCIDs
+
+**CRITICAL: You must ONLY call tools listed above. Do NOT call any other tool names.**
 
 ## Workflow
 
 1. Search for the variable DCID using `search_indicators`
-2. Use `get_observations` for single-place queries or `get_ranked_places` for rankings
+2. Use `get_observations` to fetch the data for the relevant place and date
 3. Return a JSON response with the data and widget configuration
 
 ## Available Widgets
@@ -229,12 +227,13 @@ Always respond with a JSON object. Use only predefined widget IDs from the "Avai
 ## Guidelines
 
 - Use `search_indicators` first to find variable DCIDs
-- For rankings or "top N" questions, use `get_ranked_places`
+- Use `get_observations` to fetch data for specific places
 - When no place is specified, default to "country/USA"
 - Include widget configurations when returning data
 - Present data in human-readable format (use place names, not DCIDs)
 - Format numbers with appropriate separators
 - **CRITICAL: Only use widget IDs from the Available Widgets list. Never create new widget IDs or modify existing ones.**
+- **CRITICAL: Only call tools that are listed in the Tools section above. Never call tools that are not listed.**
 
 ## Summary Field Guidelines
 
