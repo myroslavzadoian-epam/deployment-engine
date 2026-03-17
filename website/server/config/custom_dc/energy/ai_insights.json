@@ -1,0 +1,58 @@
+{
+  "domain": "energy",
+  "display_name": "Energy & Emissions",
+  "description": "Monitor methane emissions, asset health, and environmental compliance.",
+  "risk_criteria": {
+    "critical": "Proximity to disadvantaged communities or immediate safety hazard",
+    "high": "Near schools, hospitals, or exceeds EPA thresholds by >50%",
+    "medium": "Above emissions baseline by 10-50%",
+    "monitored": "Within acceptable thresholds but requires periodic review"
+  },
+  "regulatory_context": "US EPA Methane Rule, Clean Air Act, state environmental regulations",
+  "time_horizon": "72 hours to 90 days",
+  "metrics": [
+    {
+      "name": "Plume-Asset Intersections",
+      "dcid": "Count_AssetPlumeIntersection",
+      "description": "Total count of plume-asset intersections detected",
+      "is_private": true
+    },
+    {
+      "name": "Assets Near Communities",
+      "dcid": "Count_Person_BelowPovertyLevelInThePast12Months",
+      "description": "Number of assets located near communities"
+    },
+    {
+      "name": "High-Risk Issues",
+      "dcid": "Count_Person_HighRiskIssues",
+      "description": "High-risk issues reported in the last 30 days",
+      "is_private": true
+    },
+    {
+      "name": "Methane Emissions",
+      "dcid": "Annual_Emissions_Methane_CoalMining",
+      "description": "Annual methane emissions from coal mining",
+      "unit": "metric tons"
+    }
+  ],
+  "action_templates": [
+    {
+      "action_id": "inspect_critical",
+      "label_template": "Inspect {count} critical assets",
+      "priority": "critical",
+      "time_horizon": "72 hours"
+    },
+    {
+      "action_id": "review_high_risk",
+      "label_template": "Review {count} high-risk assets near community centers",
+      "priority": "high",
+      "time_horizon": "7 days"
+    },
+    {
+      "action_id": "schedule_monitoring",
+      "label_template": "Schedule monitoring for {count} medium-risk assets",
+      "priority": "medium",
+      "time_horizon": "30 days"
+    }
+  ]
+}

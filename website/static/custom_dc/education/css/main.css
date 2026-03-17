@@ -28,6 +28,8 @@
 @import 'components/_metrics.css';
 @import 'components/_status.css';
 @import 'components/_talkToYourData.css';
+@import 'components/_aiInsights.css';
+@import 'components/_aiForecastWidget.css';
 
 /* Pages - loaded conditionally based on page */
 /* @import 'pages/_homepage.css'; */

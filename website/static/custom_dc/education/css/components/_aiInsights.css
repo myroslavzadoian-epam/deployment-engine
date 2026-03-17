@@ -1,0 +1,439 @@
+/**
+ * Gemini AI Insights Widget Styles
+ * Matches Figma design: https://header-maize-94180058.figma.site/
+ */
+
+.gemini-insights-widget {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #E8EAED;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 2rem 0 1rem 0;
+  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px rgba(60, 64, 67, 0.15);
+}
+
+.gemini-insights-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.gemini-logo-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1A73E8;
+  font-style: italic;
+}
+
+.gemini-insights-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0;
+}
+
+.gemini-insights-cards-wrapper {
+  position: relative;
+  margin: 0 -8px;
+}
+
+.gemini-insights-cards-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin-bottom: 8px;
+  scroll-behavior: smooth;
+  /* Hide default scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.gemini-insights-cards-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.gemini-insight-card {
+  flex: 0 0 280px;
+  min-width: 280px;
+  background: #F8F9FA;
+  border: 1px solid #E8EAED;
+  border-radius: 16px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gemini-insight-card:hover {
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1);
+  border-color: var(--card-accent-color, #E8EAED);
+}
+
+.gemini-insight-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.gemini-insight-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.gemini-insight-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.gemini-insight-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1.5px solid;
+  background: transparent;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.gemini-insight-description {
+  font-size: 12px;
+  color: #5F6368;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+  min-height: 36px;
+}
+
+.gemini-insight-action-btn {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: #E8EAED;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #202124;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+  width: 100%;
+}
+
+.gemini-insight-action-btn:hover {
+  background: #9AA0A6;
+}
+
+.gemini-insights-scrollbar {
+  height: 6px;
+  background: #F1F3F4;
+  border-radius: 3px;
+  margin: 12px 0 0 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gemini-insights-scrollbar-thumb {
+  height: 100%;
+  background: #9AA0A6;
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.1s ease-out;
+  cursor: grab;
+}
+
+.gemini-insights-scrollbar-thumb:hover {
+  background: #5F6368;
+}
+
+.gemini-insights-scrollbar-thumb:active {
+  cursor: grabbing;
+  background: #5F6368;
+}
+
+.gemini-insights-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: #5F6368;
+}
+
+.gemini-insights-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #E8EAED;
+  border-top: 3px solid #1A73E8;
+  border-radius: 50%;
+  animation: gemini-spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes gemini-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gemini-insights-error {
+  background: #FDECEA;
+  border: 1px solid #EA4335;
+  border-radius: 8px;
+  padding: 16px;
+  color: #EA4335;
+  text-align: center;
+}
+
+.gemini-insights-error-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid #EA4335;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #EA4335;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.gemini-insights-error-btn:hover {
+  background: rgba(234, 67, 53, 0.1);
+}
+
+.gemini-insights-empty {
+  text-align: center;
+  padding: 48px;
+  color: #5F6368;
+}
+
+/* Modal Styles */
+.gemini-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(32, 33, 36, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  padding: 24px;
+}
+
+.gemini-modal-overlay.gemini-modal-visible {
+  opacity: 1;
+}
+
+.gemini-modal-container {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+              0 9px 46px 8px rgba(0, 0, 0, 0.12),
+              0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.gemini-modal-visible .gemini-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+.gemini-modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid #E8EAED;
+}
+
+.gemini-modal-icon {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gemini-modal-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.gemini-modal-header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.gemini-modal-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #202124;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.gemini-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1.5px solid;
+  background: transparent;
+  width: fit-content;
+}
+
+.gemini-modal-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  margin: -8px -8px 0 0;
+  cursor: pointer;
+  color: #5F6368;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.gemini-modal-close:hover {
+  background: #F1F3F4;
+  color: #202124;
+}
+
+.gemini-modal-close svg {
+  width: 24px;
+  height: 24px;
+}
+
+.gemini-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.gemini-modal-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3C4043;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.gemini-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #E8EAED;
+  background: #F8F9FA;
+}
+
+.gemini-modal-btn-secondary {
+  padding: 10px 24px;
+  background: #FFFFFF;
+  border: 1px solid #DADCE0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5F6368;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.gemini-modal-btn-secondary:hover {
+  background: #F1F3F4;
+  border-color: #5F6368;
+}
+
+.gemini-modal-btn-primary {
+  padding: 10px 24px;
+  background: #1A73E8;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gemini-modal-btn-primary:hover {
+  background: #1557B0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 600px) {
+  .gemini-modal-overlay {
+    padding: 16px;
+  }
+
+  .gemini-modal-container {
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+
+  .gemini-modal-header {
+    padding: 20px 20px 16px 20px;
+    flex-wrap: wrap;
+  }
+
+  .gemini-modal-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  .gemini-modal-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .gemini-modal-title {
+    font-size: 18px;
+  }
+
+  .gemini-modal-body {
+    padding: 20px;
+  }
+
+  .gemini-modal-description {
+    font-size: 14px;
+  }
+
+  .gemini-modal-footer {
+    padding: 16px 20px;
+  }
+}
