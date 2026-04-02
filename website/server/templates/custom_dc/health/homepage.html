@@ -28,6 +28,41 @@
   </div>
   </section>
 
+  <!-- talk to your data -->
+  <div class="ai-card">
+    <div class="ai-card-header">
+      <div>
+        <h2 class="ai-card-title">Chat with AI to explore education metrics</h2>
+        <p class="ai-card-description">Ask questions about metrics, states, or data sources</p>
+      </div>
+      <div class="ai-badge">
+        <md-icon class="ai-badge-icon">auto_awesome</md-icon>
+        <span class="ai-badge-text">AI Assistant</span>
+      </div>
+    </div>
+    <div class="ai-input-container">
+      <md-outlined-text-field
+          id="ai-query-input"
+          class="ai-text-field"
+          placeholder="Ask me anything about education metrics, states, or datasets..."
+          type="text">
+        <md-icon slot="leading-icon">search</md-icon>
+      </md-outlined-text-field>
+      <md-filled-button id="ai-ask-button" class="ai-ask-button">
+        Ask AI
+      </md-filled-button>
+    </div>
+    <div class="ai-examples">
+      <span class="ai-examples-label">Try:</span>
+      <a href="#" class="example-link" data-query="Compare diabetes rates in Boston and Houston">Compare diabetes rates in Boston and Houston</a>
+      <a href="#" class="example-link" data-query="Show me obesity trends for California">Show me obesity trends for California</a>
+      <a href="#" class="example-link" data-query="Show me smoking trends for Texas">Show me smoking trends for Texas</a>
+    </div>
+    <div id="ai-response-container">
+      <!-- AI-generated widgets will be injected here -->
+    </div>
+  </div>
+
   <!-- Metrics Summary -->
   <div class="metrics-header">
   <h2 class="metrics-title" id="key-metrics-indicators-title">Key Metrics Indicators</h2>
@@ -59,4 +94,5 @@
 
 {% block footer %}
 <script type="module" src="{{url_for('static', filename='custom_dc/health/js/pages/homepage/index.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='custom_dc/education/js/components/talkToYourData.js')}}"></script>
 {% endblock %}

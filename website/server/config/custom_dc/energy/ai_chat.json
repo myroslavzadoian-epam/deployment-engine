@@ -1,0 +1,157 @@
+{
+  "domain": "energy",
+  "display_name": "Energy & Emissions Intelligence",
+  "description": "Monitor energy consumption, methane emissions, and environmental compliance metrics.",
+  "assistant_role": "You are an expert assistant for an energy and emissions monitoring dashboard. Your role is to help analyze energy data, emissions patterns, and environmental compliance using the Data Commons API tools. For methane emission queries use Annual_Emissions_GreenhouseGas_NonBiogenic variable",
+  "search_keywords": ["emissions", "methane", "energy", "power", "electricity", "gas", "carbon", "renewable"],
+  "place_examples": [
+    {"name": "Texas", "dcid": "geoId/48"},
+    {"name": "California", "dcid": "geoId/06"},
+    {"name": "USA", "dcid": "country/USA"}
+  ],
+  "widgets": [
+    {
+      "id": "plumeAssetIntersections",
+      "description": "KPI card showing total plume-asset intersections count",
+      "default_variable": "Count_AssetPlumeIntersection",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "asssetsNearCommunities",
+      "description": "KPI card showing assets near communities count",
+      "default_variable": "Count_Person_BelowPovertyLevelInThePast12Months",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highRiskIssues",
+      "description": "KPI card showing high-risk issues count (30 days)",
+      "default_variable": "Count_Person_HighRiskIssues",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "dcMap",
+      "description": "Choropleth map showing methane emissions by geographic region",
+      "default_variable": "Annual_Emissions_Methane_CoalMining",
+      "supports": ["variable", "parentPlace", "childPlaceType", "date"]
+    }
+  ],
+  "widget_selection_rules": [
+    "For plume-asset intersections → plumeAssetIntersections",
+    "For community proximity or assets near communities → asssetsNearCommunities",
+    "For high-risk issues or urgent matters → highRiskIssues",
+    "For geographic distribution, state comparisons, or 'show on map' → dcMap",
+    "For methane emissions data → plumeAssetIntersections or dcMap"
+  ],
+  "example_queries": [
+    {
+      "question": "What are the top 10 states by methane emissions?",
+      "steps": [
+        "Call search_indicators(query=\"methane emissions\", include_topics=true)",
+        "From the result, pick the best variable DCID (e.g., \"Annual_Emissions_Methane_CoalMining\")",
+        "Call get_ranked_places(variable=\"Annual_Emissions_Methane_CoalMining\", parent_place=\"country/USA\", child_place_type=\"State\", limit=10)",
+        "Return the ranked list of state NAMES with their values",
+        "Update dcMap widget to show this data geographically"
+      ]
+    },
+    {
+      "question": "What is the total energy consumption in California?",
+      "steps": [
+        "Call search_indicators(query=\"energy consumption\", include_topics=true)",
+        "From the result, pick the first variable DCID",
+        "Call get_observations(variable=\"...\", place=\"geoId/06\")",
+        "Return the value and update dcMap widget with place=geoId/06"
+      ]
+    },
+    {
+      "question": "What are the total methane emissions?",
+      "steps": [
+        "Call search_indicators(query=\"methane emissions\", include_topics=true)",
+        "From the result, pick the variable DCID",
+        "Call get_observations(variable=\"Annual_Emissions_Methane_CoalMining\", place=\"country/USA\")",
+        "Return the total value and update plumeAssetIntersections widget with place=country/USA"
+      ]
+    },
+    {
+      "question": "Show me high-risk issues in Texas",
+      "steps": [
+        "Call search_indicators(query=\"high risk issues\", include_topics=true)",
+        "Call get_observations(variable=\"Count_Person_HighRiskIssues\", place=\"geoId/48\")",
+        "Return the value and update highRiskIssues widget with place=geoId/48"
+      ]
+    },
+    {
+      "question": "How many assets are near communities?",
+      "steps": [
+        "Call get_observations(variable=\"Count_Person_BelowPovertyLevelInThePast12Months\", place=\"country/USA\")",
+        "Return the value and update asssetsNearCommunities widget"
+      ]
+    }
+  ],
+  "response_examples": [
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "There are 245 plume-asset intersections detected in the Carlsbad Region.",
+        "source": "Energy & Emissions Dashboard",
+        "widgetIds": ["plumeAssetIntersections"],
+        "widgetConfigs": {
+          "plumeAssetIntersections": {
+            "variable": "Count_AssetPlumeIntersection",
+            "place": "geoId/48",
+            "date": "LATEST",
+            "title": "Plume-Asset Intersections"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "There are 1,234 assets located near communities in the monitoring area.",
+        "source": "Energy & Emissions Dashboard",
+        "widgetIds": ["asssetsNearCommunities"],
+        "widgetConfigs": {
+          "asssetsNearCommunities": {
+            "variable": "Count_Person_BelowPovertyLevelInThePast12Months",
+            "place": "country/USA",
+            "date": "LATEST",
+            "title": "Assets Near Communities"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "There are 42 high-risk issues reported in the last 30 days.",
+        "source": "Energy & Emissions Dashboard",
+        "widgetIds": ["highRiskIssues"],
+        "widgetConfigs": {
+          "highRiskIssues": {
+            "variable": "Count_Person_HighRiskIssues",
+            "place": "country/USA",
+            "date": "LATEST",
+            "title": "High-Risk Issues (30 days)"
+          }
+        }
+      }
+    },
+    {
+      "type": "map",
+      "example": {
+        "summary": "Here is the geographic distribution of methane emissions across states.",
+        "source": "Energy & Emissions Dashboard",
+        "widgetIds": ["dcMap"],
+        "widgetConfigs": {
+          "dcMap": {
+            "variable": "Annual_Emissions_Methane_CoalMining",
+            "parentPlace": "country/USA",
+            "childPlaceType": "State",
+            "date": "LATEST",
+            "title": "Methane Emissions by State"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "domain": "health",
+  "display_name": "Health Intelligence",
+  "description": "Track health outcomes, disease prevalence, and healthcare access metrics.",
+  "assistant_role": "You are an expert assistant for a public health intelligence dashboard. Your role is to help analyze health data, disease patterns, and healthcare access using the Data Commons API tools.",
+  "search_keywords": ["mortality", "health", "disease", "hospital", "healthcare", "insurance", "death", "prevalence"],
+  "place_examples": [
+    {"name": "Boston, MA", "dcid": "geoId/2507000"},
+    {"name": "Houston, TX", "dcid": "geoId/4842000"},
+    {"name": "Los Angeles, CA", "dcid": "geoId/0644000"},
+    {"name": "San Antonio, TX", "dcid": "geoId/4865000"},
+    {"name": "Austin, TX", "dcid": "geoId/4805000"},
+    {"name": "Nashville, TN", "dcid": "geoId/4752006"},
+    {"name": "San Diego, CA", "dcid": "geoId/0666000"},
+    {"name": "Sacramento, CA", "dcid": "geoId/0664000"}
+  ],
+  "widgets": [
+    {
+      "id": "highlightObesity",
+      "description": "Shows obesity rate data",
+      "default_variable": "Percent_Person_Obesity",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightSmoking",
+      "description": "Shows smoking rate data",
+      "default_variable": "Percent_Person_Smoking",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightPhysicalHealth",
+      "description": "Shows physical health not good rate data",
+      "default_variable": "Percent_Person_WithPhysicalHealthNotGood",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightDiabetes",
+      "description": "Shows diabetes rate data",
+      "default_variable": "Percent_Person_WithDiabetes",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightHighBloodPressure",
+      "description": "Shows high blood pressure rate data",
+      "default_variable": "Percent_Person_WithHighBloodPressure",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightVitaminD",
+      "description": "Shows vitamin D rate data",
+      "default_variable": "Percent_Person_WithHealthyVitaminD",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightVaccination",
+      "description": "Shows vaccination rate data",
+      "default_variable": "Percent_Person_Vaccinated",
+      "supports": ["variable", "place", "date"]
+    },
+    {
+      "id": "highlightSickPeople",
+      "description": "Shows sick people rate data",
+      "default_variable": "Percent_Person_Sick",
+      "supports": ["variable", "place", "date"]
+    }
+  ],
+  "example_queries": [
+    {
+      "question": "Compare diabetes rates in Boston and Houston",
+      "steps": [
+        "Call get_observations(variable=\"Percent_Person_WithDiabetes\", place=\"geoId/2507000\")",
+        "Call get_observations(variable=\"Percent_Person_WithDiabetes\", place=\"geoId/4842000\")",
+        "Return the values and update the diabetesRate widget with place=geoId/2507000 and geoId/4842000"
+      ]
+    },
+    {
+      "question": "Show me obecity trends for California",
+      "steps": [
+        "Call get_observations(variable=\"Percent_Person_Obesity\", place=\"geoId/06\")",
+        "Return the values and update the obecityTrend widget with place=geoId/06"
+      ]
+    },
+    {
+      "question": "Show me smoking trends for Texas",
+      "steps": [
+        "Call get_observations(variable=\"Percent_Person_Smoking\", place=\"geoId/48\")",
+        "Return the values and update the smokingTrend widget with place=geoId/48"
+      ]
+    }
+  ],
+  "response_examples": [
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The diabetes rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightDiabetes"],
+        "widgetConfigs": {
+          "highlightDiabetes": {
+            "variable": "Percent_Person_WithDiabetes",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Diabetes Rate (Boston)"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The smoking rate in Boston was 15.2% and in Houston was 16.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightSmoking"],
+        "widgetConfigs": {
+          "highlightSmoking": {
+            "variable": "Percent_Person_Smoking",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Smoking Rate (Boston)"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The physical health not good rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightPhysicalHealth"],
+        "widgetConfigs": {
+          "highlightPhysicalHealth": {
+            "variable": "Percent_Person_WithPhysicalHealthNotGood",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Physical Health Not Good Rate (Boston)"
+          }
+        }
+      }
+      },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The high blood pressure rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightHighBloodPressure"],
+        "widgetConfigs": {
+          "highlightHighBloodPressure": {
+            "variable": "Percent_Person_WithHighBloodPressure",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "High Blood Pressure Rate (Boston)"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The vitamin D rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightVitaminD"],
+        "widgetConfigs": {
+          "highlightVitaminD": {
+            "variable": "Percent_Person_WithHealthyVitaminD",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Vitamin D Rate (Boston)"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The vaccination rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Public Health Intelligence Dashboard",
+        "widgetIds": ["highlightVaccination"],
+        "widgetConfigs": {
+          "highlightVaccination": {
+            "variable": "Percent_Person_Vaccinated",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Vaccination Rate (Boston)"
+          }
+        }
+      }
+    },
+    {
+      "type": "single_value",
+      "example": {
+        "summary": "The sick people rate in Boston was 10.2% and in Houston was 11.5%.",
+        "source": "Health Intelligence Dashboard",
+        "widgetIds": ["highlightSickPeople"],
+        "widgetConfigs": {
+          "highlightSickPeople": {
+            "variable": "Percent_Person_Sick",
+            "place": "geoId/2507000",
+            "date": "LATEST",
+            "title": "Sick People Rate (Boston)"
+          }
+        }
+      }
+    }
+  ]
+}

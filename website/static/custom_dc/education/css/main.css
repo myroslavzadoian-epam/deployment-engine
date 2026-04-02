@@ -27,6 +27,7 @@
 @import 'components/_alert.css';
 @import 'components/_metrics.css';
 @import 'components/_status.css';
+@import 'components/_talkToYourData.css';
 
 /* Pages - loaded conditionally based on page */
 /* @import 'pages/_homepage.css'; */
